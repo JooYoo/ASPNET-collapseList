@@ -1,0 +1,309 @@
+﻿<link href="~/Content/TablePage.css" rel="stylesheet" type="text/css" media="screen" runat="server" />
+
+@model List<LizenzManager.Models.License>
+
+<div class="container">
+
+
+
+    <div class="row">
+        <div class="col-md-1">
+            @*left*@
+        </div>
+        <div class="col-md-10">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-primary float-right shadow-sm" data-toggle="modal" data-target="#exampleModalCenter" style="margin: 20px">
+                New Licence
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">New Licence</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="padding-top: 0">
+                            <form>
+                                @*Licence Title*@
+                                <div class="form-row editModalForm">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light" id="">Licence Title</span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                @*Expiration Date*@
+                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light" id="">Expiration Date</span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                @*Key*@
+                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light" id="">Key</span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                @*Seat*@
+                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light" id="">Seat</span>
+                                        </div>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                @*Notes*@
+                                <div class="form-row " style="margin-top: 20px;">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-light">Note</span>
+                                        </div>
+                                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*mainBody*@
+            <table class="table table-bordered" style="border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Key</th>
+                        <th>Expiration Date</th>
+                        <th>Seat</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var i = 0;
+                        foreach (var license in Model)
+                        {
+                            var heading = "heading" + i;
+
+                            var tab1 = "tab1" + i;
+                            var tab2 = "tab2" + i;
+                            var tab3 = "tab3" + i;
+
+                            <tr>
+                                <td data-toggle="collapse" data-target="#@heading">@(i + 1)</td>
+                                <td data-toggle="collapse" data-target="#@heading">@license.Name</td>
+                                <td data-toggle="collapse" data-target="#@heading">@license.Key</td>
+                                <td data-toggle="collapse" data-target="#@heading">@license.ExpirationDate.ToShortDateString()</td>
+                                <td data-toggle="collapse" data-target="#@heading">@license.Seat.Name</td>
+                                <td data-toggle="collapse" data-target="#@heading">@license.Notes</td>
+                                <td>
+                                    @*Edit button*@
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editModal">Edit</button>
+                                        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item " href="#">Delete</a>
+                                        </div>
+                                        @*EditModal*@
+                                        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Licence</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="modal-body" style="padding-top: 0">
+                                                            <form>
+                                                                @*Licence Title*@
+                                                                <div class="form-row editModalForm">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="">Licence Title</span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                @*Expiration Date*@
+                                                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="">Expiration Date</span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                @*Key*@
+                                                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="">Key</span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                @*Seat*@
+                                                                <div class="form-row editModalForm" style="margin-top: 20px">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text" id="">Seat</span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                @*Notes*@
+                                                                <div class="form-row " style="margin-top: 20px;">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text">Note</span>
+                                                                        </div>
+                                                                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7" class="hiddenRow">
+                                    <div class="collapse" id="@heading" style="background-color: #fafafa">
+
+                                        @*Title-Area*@
+                                        <div class="card" style="margin: 20px">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Licence Name</h5>
+                                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam urna nibh, aliquet id rhoncus sed, pellentesque sed libero.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+
+                                        @*InfoHighlight-Area*@
+                                        <div class="card-deck" style="margin: 20px">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-left">title</h5>
+                                                    <div class="dropdown-divider"></div>
+                                                    <p class="card-text text-left">Praesent vestibulum velit vel tellus pellentesque ullamcorper.</p>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-left">title</h5>
+                                                    <div class="dropdown-divider"></div>
+                                                    <p class="card-text text-left">Praesent vestibulum velit vel tellus pellentesque ullamcorper.</p>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-left">title</h5>
+                                                    <div class="dropdown-divider"></div>
+                                                    <p class="card-text text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam urna nibh, aliquet id rhoncus sed, pellentesque sed libero.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @*ChoiceTab*@
+                                        <div class="card" style="padding: 20px; margin: 20px;">
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#@tab1" role="tab" aria-controls="home" aria-selected="true">Manage seats</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#@tab2" role="tab" aria-controls="profile" aria-selected="false">Add more seats</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#@tab3" role="tab" aria-controls="contact" aria-selected="false">Manage subscription</a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="tab-content" id="myTabContent" style="padding: 10px">
+                                                <div class="tab-pane fade show active" id="@tab1" role="tabpanel" aria-labelledby="home-tab">
+
+                                                    <form class="form-inline my-2 my-lg-0 row">
+                                                        <input class="form-control mr-sm-2 col-5" type="search" placeholder="Search" aria-label="Search" style="margin-top: 20px; margin-left: 5px">
+                                                        @*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>*@
+                                                    </form>
+
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">First</th>
+                                                                <th scope="col">Last</th>
+                                                                <th scope="col">Handle</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">1</th>
+                                                                <td>Mark</td>
+                                                                <td>Otto</td>
+                                                                <td>mdo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">2</th>
+                                                                <td>Jacob</td>
+                                                                <td>Thornton</td>
+                                                                <td>fat</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">3</th>
+                                                                <td colspan="2">Larry the Bird</td>
+                                                                <td>twitter</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="tab-pane fade" id="@tab2" role="tabpanel" aria-labelledby="profile-tab">Content2</div>
+                                                <div class="tab-pane fade" id="@tab3" role="tabpanel" aria-labelledby="contact-tab">Content3</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-1">
+            @*right*@
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>

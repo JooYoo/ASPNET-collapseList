@@ -1,0 +1,2 @@
+C:\Projects\LizenzManager\LizenzManager\LizenzManager_UnitTests\obj\Debug\LizenzManager_UnitTests.csprojAssemblyReference.cache
+C:\Projects\LizenzManager\LizenzManager\LizenzManager_UnitTests\obj\Debug\LizenzManager_UnitTests.csproj.CoreCompileInputs.cache
